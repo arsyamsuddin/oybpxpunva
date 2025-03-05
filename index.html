@@ -6,11 +6,49 @@
     <title>Quote</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="flex items-center justify-center min-h-screen bg-gradient-to-br from-green-200 to-green-400">
+<body class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-100 to-gray-300">
+    
+    <h1 class="text-3xl font-bold text-gray-900 mb-6">
+        Kata-Kata untuk hari ini 
+        <span id="header-name" class="text-green-600 shadow-lg">Pak Sujud</span>
+    </h1>
+    
     <div class="bg-white p-8 rounded-3xl shadow-2xl max-w-lg text-center">
-        <img src="https://i.pravatar.cc/100" alt="Foto Pak Sujud" class="w-24 h-24 mx-auto rounded-full mb-4 border-4 border-green-300">
-        <p class="text-2xl font-bold text-gray-800">"Kamu yang belum selesai, ngapain?"</p>
-        <p class="text-gray-600 mt-3 text-lg">- Pak Sujud</p>
+        <img id="profile-img" src="https://i.pravatar.cc/100" alt="Foto Orang" class="w-24 h-24 mx-auto rounded-full mb-4 border-4 border-green-300">
+        <p id="quote" class="text-2xl font-bold text-gray-800">"Kamu yang belum selesai, ngapain?"</p>
+        <p id="author" class="text-gray-600 mt-3 text-lg">- Pak Sujud</p>
     </div>
+    
+    <div class="mt-6 flex gap-4">
+        <button onclick="prevQuote()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600">⬅️</button>
+        <button onclick="nextQuote()" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600">➡️</button>
+    </div>
+    
+    <script>
+        const quotes = [
+            { name: "Pak Sujud", img: "https://i.pravatar.cc/100", text: "Kamu yang belum selesai, ngapain?" },
+            { name: "Pak Mugiwan", img: "https://i.pravatar.cc/101", text: "Kesuksesan bukan tentang seberapa cepat, tapi seberapa konsisten." },
+            { name: "Pak Karto", img: "https://i.pravatar.cc/102", text: "Sabar dan usaha adalah dua sisi dari koin keberhasilan." }
+        ];
+        
+        let currentIndex = 0;
+        
+        function updateQuote() {
+            document.getElementById("header-name").textContent = quotes[currentIndex].name;
+            document.getElementById("profile-img").src = quotes[currentIndex].img;
+            document.getElementById("quote").textContent = `"${quotes[currentIndex].text}"`;
+            document.getElementById("author").textContent = `- ${quotes[currentIndex].name}`;
+        }
+        
+        function nextQuote() {
+            currentIndex = (currentIndex + 1) % quotes.length;
+            updateQuote();
+        }
+        
+        function prevQuote() {
+            currentIndex = (currentIndex - 1 + quotes.length) % quotes.length;
+            updateQuote();
+        }
+    </script>
 </body>
 </html>
