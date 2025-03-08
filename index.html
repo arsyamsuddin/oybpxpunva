@@ -15,11 +15,17 @@
         <span id="header-name" class="text-green-600 shadow-lg"></span>
     </h1>
     
-    <div class="bg-white p-8 rounded-3xl shadow-2xl max-w-lg text-center">
+    <div class="relative bg-white p-8 rounded-3xl shadow-2xl max-w-lg text-center">
+        <!-- Tombol Edit di sudut kanan atas -->
+        <button id="editBtn" class="absolute top-2 right-2 text-gray-600 hover:text-gray-900">
+            <i class="fas fa-edit"></i>
+        </button>
+    
         <img id="profile-img" src="" alt="Foto Orang" class="w-24 h-24 mx-auto rounded-full mb-4 border-4 border-green-300">
         <p id="quote" class="text-2xl font-bold text-gray-800"></p>
         <p id="author" class="text-gray-600 mt-3 text-lg"></p>
     </div>
+    
     
     <div class="mt-6 flex gap-4">
         <button id="prevBtn" class="px-4 py-2 bg-green-500 text-white rounded-l-lg shadow-md hover:bg-green-600">
@@ -32,7 +38,7 @@
         </button>
         <button id="deleteBtn" class="px-4 py-2 bg-red-500 text-white rounded-lg shadow-md hover:bg-red-600">Hapus Kata
         </button>
-    </div>
+    </div>    
 
     <!-- Popup Form untuk menambahkan quote baru -->
     <div id="addQuotePopup" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
@@ -71,6 +77,8 @@
 
         const prevButton = document.getElementById("prevBtn");
         const nextButton = document.getElementById("nextBtn");
+
+        const editButton = document.getElementById("editBtn");
 
         const addButton = document.getElementById("addBtn");
         const addQuotePopup = document.getElementById("addQuotePopup");
@@ -116,6 +124,12 @@
         } else {
             alert("Tidak bisa menghapus semua kutipan!");
         }
+        });
+
+        editButton.addEventListener("click", function() {
+            newQuoteInput.value = quotes[currentQuoteIndex].quote;
+            newAuthorInput.value = quotes[currentQuoteIndex].author;
+            addQuotePopup.classList.remove("hidden");
         });
 
         function handleSaveQuoteButton(){
